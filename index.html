@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type='text/javascript' src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    <script type='text/javascript' src="scripts/ko-chart.js"></script>
+    <script type='text/javascript' src="scripts/cloud.js"></script>
+    <script type='text/javascript' src="scripts/vm.js"></script>
+  </head>
+  <body>
+    <div class="fluid-container">
+    <h1>Knockout Chart Binding Example</h1>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Controls
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-4">
+          <p>Select Endpoint: <b><span 
+            data-bind = "text:selectedEndpoint"></b></span></p>
+          </div>
+          <div class="col-xs-4">
+            <select data-bind = "options: availableEndpoints, value: selectedEndpoint, optionsCaption: 'Choose Endpoint...'"></select></p>
+          </div>
+          <div class="col-xs-4">
+            <button class="btn btn-default" data-bind="click: getEndpoints">Refresh</button>
+            <button class="btn btn-default" data-bind="click: getEndpointInfo">getEndpointInfo</button>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    
+      
+      
+
+
+    <div>
+      <canvas width="100" height="100" data-bind="chartType: 'Pie', segmentClick: alertLabel, chartData: pieData, chartOptions: pieChartOptions, chartJsAsBase64Image: chart1Image, chartJsLegend: chart1Legend"></canvas>
+      <span data-bind="html: chart1Legend"></span>
+
+      <div class="well">
+        <h5>
+          Chart 1 Legend (HTML)
+        </h5>
+        <pre data-bind="text: chart1Legend"></pre>
+        <h5>Image (Base64)</h5>
+        <img data-bind="src: chart1Image"></img>
+        <div data-bind="html: chart1Image"></div>
+      </div>
+    </div>
+
+    <canvas width="200" height="200" data-bind="chartType: 'Doughnut', segmentClick: alertLabel, chartData: machines, chartOptions : doughnutChartOptions"></canvas>
+
+    <canvas width="300" height="150" data-bind="chartType: 'Bar', barClick: alertJson, chartData: browserData, chartOptions : { animation : true, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'}"></canvas>
+
+    <canvas width="300" height="150" data-bind="chartType: 'Line', lineClick: alertJson, chartData: lineData, chartOptions : { animation : true, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'"></canvas>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Controls
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <button class="btn btn-default" data-bind="click: setPieData1">Pie Data 1</button>
+            <button class="btn btn-default" data-bind="click: setPieData2">Pie Data 2</button>
+            <button class="btn btn-default" data-bind="click: setPieChartOptions1">
+            Options 1
+            </button>
+            <button class="btn btn-default" data-bind="click: setPieChartOptions2">
+            Options 2
+            </button>
+            <button class="btn btn-info" onclick="alert($('canvas')[0].toDataURL());">
+              Get Image
+            </button>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <button class="btn btn-default" data-bind="click: setDataSet1">Data Set 1</button>
+            <button class="btn btn-default" data-bind="click: setDataSet2">Data Set 2</button>
+            <button class="btn btn-default" data-bind="click: setDoughnutChartOptions1">
+            Options 1
+            </button>
+            <button class="btn btn-default" data-bind="click: setDoughnutChartOptions2">
+            Options 2
+            </button>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <button class="btn btn-default" data-bind="click: setBrowserData1">Browsers 1</button>
+            <button class="btn btn-default" data-bind="click: setBrowserData2">Browsers 2</button>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <button class="btn btn-default" data-bind="click: setLineData1">Line Data 1</button>
+            <button class="btn btn-default" data-bind="click: setLineData2">Line Data 2</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>
