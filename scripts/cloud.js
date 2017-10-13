@@ -1,5 +1,5 @@
 function Cloud() {
-    this.server = "https://api.connector.mbed.com";
+    this.server = "https://api.connector.mbed.com/v2";
     this.key = "KGC48Y04jRsJgYG4Uwnx1dmMfhVImYwy49sc87PafmJDJLdmvexESLhy4J0AeLmbwvbE5kMfIoy9PDSYVoTSvl55Kue3InElCB7N";
     this.authorization = "Bearer " + this.key;
 }
@@ -29,11 +29,11 @@ Cloud.prototype.getEndpointInfo = function (packet) {
       $.ajax({
         url: self.server + "/endpoints/" + packet.endpoint,
         type: "get",
-        contentType: "application/octet-stream",
+        contentType: "application/json",
         dataType:"json",
           headers: {
         "Authorization": self.authorization,
-        data: ""
+        data: JSON.stringify({"noResp":false, "cacheOnly": false})
         },
       }).done(function (result) {
         console.log(result);
