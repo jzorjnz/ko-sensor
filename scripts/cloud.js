@@ -2,6 +2,10 @@ function Cloud() {
     this.server = "https://api.connector.mbed.com/v2";
     this.key = "KGC48Y04jRsJgYG4Uwnx1dmMfhVImYwy49sc87PafmJDJLdmvexESLhy4J0AeLmbwvbE5kMfIoy9PDSYVoTSvl55Kue3InElCB7N";
     this.authorization = "Bearer " + this.key;
+    this.headers = {
+        "Authorization": this.authorization,
+        "Access-Control-Allow-Origin": "*"
+    }
 }
 
 Cloud.prototype.getDevices = function (packet) {
@@ -12,29 +16,22 @@ Cloud.prototype.getDevices = function (packet) {
         type: "get",
         contentType: "application/json",
         dataType:"json",
-          headers: {
-        "Authorization": self.authorization
-        },
-        data:JSON.stringify(packet),
+        headers: self.headers,
       }).done(function (result) {
         resolve(result);
       });
     });
   };
 
-Cloud.prototype.getEndpointInfo = function (packet) {
+Cloud.prototype.getEndpointInfo = function (endpoint) {
     var self = this;
-    console.log("packet: " + JSON.stringify(packet));
+    //console.log("packet: " + JSON.stringify(packet));
     return new Promise(function (resolve, reject) {
       $.ajax({
-        url: self.server + "/endpoints/" + packet.endpoint,
+        url: self.server + "/endpoints/" + endpoint,
         type: "get",
         contentType: "application/json",
-        dataType:"json",
-          headers: {
-        "Authorization": self.authorization,
-        data: JSON.stringify({"noResp":false, "cacheOnly": false})
-        },
+        headers: self.headers,
       }).done(function (result) {
         console.log(result);
         resolve(result);

@@ -38,7 +38,26 @@
     </div>
 
     
-    
+    <div id="images"></div>
+ 
+<script>
+(function() {
+  var flickerAPI = "https://api.connector.mbed.com/endpoints/9fecf0eb-e3af-4d5b-93d1-277696c81919?jsoncallback=?";
+  $.getJSON( flickerAPI, {
+    format: "json",
+    headers: {
+      "authorization": "Bearer KGC48Y04jRsJgYG4Uwnx1dmMfhVImYwy49sc87PafmJDJLdmvexESLhy4J0AeLmbwvbE5kMfIoy9PDSYVoTSvl55Kue3InElCB7N"
+    }
+  })
+  .done(function( data ) {
+    console.log(data);
+      
+      
+    });
+})();
+</script>
+
+
       
       
 

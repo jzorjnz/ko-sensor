@@ -28,9 +28,9 @@ function KoModel(data) {
   self.getEndpointInfo = function() {
     if(self.selectedEndpoint() && self.selectedEndpoint().length > 0 ){
       console.log("" + self.selectedEndpoint());
-      var packet = {"endpoint": self.selectedEndpoint() + '/3303/0/5700?cacheOnly=false&noResp=false'};
+      //var packet = {"endpoint": self.selectedEndpoint()};// + '/3303/0/5700?cacheOnly=false&noResp=false'};
 
-      cloud.getEndpointInfo(packet).then(function (data) {
+      cloud.getEndpointInfo("" + self.selectedEndpoint()).then(function (data) {
         console.log("function response: " + JSON.stringify(data));
         
       });
