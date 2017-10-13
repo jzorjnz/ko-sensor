@@ -4,7 +4,7 @@ function Cloud() {
     this.authorization = "Bearer " + this.key;
     this.headers = {
         "Authorization": this.authorization,
-        "Access-Control-Allow-Origin": "*"
+        //"Access-Control-Allow-Origin": "*"
     }
 }
 
