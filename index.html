@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class="fluid-container">
-    <h1>Knockout Chart Binding Example</h1>
+    <h1>ST Sensors Cloud Demo</h1>
     <div class="panel panel-default">
       <div class="panel-heading">
         Controls
@@ -26,103 +26,47 @@
             data-bind = "text:selectedEndpoint"></b></span></p>
           </div>
           <div class="col-xs-4">
+            <button class="btn btn-default" data-bind="click: getEndpoints">Refresh</button><br>
             <select data-bind = "options: availableEndpoints, value: selectedEndpoint, optionsCaption: 'Choose Endpoint...'"></select></p>
           </div>
           <div class="col-xs-4">
-            <button class="btn btn-default" data-bind="click: getEndpoints">Refresh</button>
+            <button class="btn btn-default" data-bind="click: startService">Start</button>
+            <!--
             <button class="btn btn-default" data-bind="click: getEndpointInfo">getEndpointInfo</button>
-          
+            <button class="btn btn-default" data-bind="click: startTempNotificationService">startTempNotificationService</button>
+            <button class="btn btn-default" data-bind="click: startPressureNotificationService">startPressureNotificationService</button>
+            <button class="btn btn-default" data-bind="click: startButtonNotificationService">startButtonNotificationService</button>
+            <button class="btn btn-default" data-bind="click: getResource">getResource</button>
+            -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Tables
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-6">
+            <canvas id="temp_chart" data-bind="chartType: 'Line', chartData: tempData, chartOptions : { duration: 0, update: 0, animation : false, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'"></canvas>
+            <br><div align="center" text-align: center;><p>Temperature</p></div>
+          </div>
+          <div class="col-xs-6">
+            <canvas id="pressure_chart" data-bind="chartType: 'Line', chartData: pressureData, chartOptions : { duration: 0, update: 0, animation : false, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'"></canvas>
+            <br><div align="center"><p>Pressure</p></div>
+          </div>
+          <div class="col-xs-6">
+            <canvas id="button_chart" data-bind="chartType: 'Line', chartData: buttonData, chartOptions : { duration: 0, update: 0, animation : false, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'"></canvas>
+            <br><div align="center"><p>Button count</p></div>
           </div>
         </div>
       </div>
     </div>
 
     
-    <div id="images"></div>
- 
-<script>
-(function() {
-  var flickerAPI = "https://api.connector.mbed.com/endpoints/9fecf0eb-e3af-4d5b-93d1-277696c81919?jsoncallback=?";
-  $.getJSON( flickerAPI, {
-    format: "json",
-    headers: {
-      "authorization": "Bearer KGC48Y04jRsJgYG4Uwnx1dmMfhVImYwy49sc87PafmJDJLdmvexESLhy4J0AeLmbwvbE5kMfIoy9PDSYVoTSvl55Kue3InElCB7N"
-    }
-  })
-  .done(function( data ) {
-    console.log(data);
-      
-      
-    });
-})();
-</script>
-
-
-      
-      
-
-
-    <div>
-      <canvas width="100" height="100" data-bind="chartType: 'Pie', segmentClick: alertLabel, chartData: pieData, chartOptions: pieChartOptions, chartJsAsBase64Image: chart1Image, chartJsLegend: chart1Legend"></canvas>
-      <span data-bind="html: chart1Legend"></span>
-
-      <div class="well">
-        <h5>
-          Chart 1 Legend (HTML)
-        </h5>
-        <pre data-bind="text: chart1Legend"></pre>
-        <h5>Image (Base64)</h5>
-        <img data-bind="src: chart1Image"></img>
-        <div data-bind="html: chart1Image"></div>
-      </div>
-    </div>
-
-    <canvas width="200" height="200" data-bind="chartType: 'Doughnut', segmentClick: alertLabel, chartData: machines, chartOptions : doughnutChartOptions"></canvas>
-
-    <canvas width="300" height="150" data-bind="chartType: 'Bar', barClick: alertJson, chartData: browserData, chartOptions : { animation : true, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'}"></canvas>
-
-    <canvas width="300" height="150" data-bind="chartType: 'Line', lineClick: alertJson, chartData: lineData, chartOptions : { animation : true, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'"></canvas>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Controls
-      </div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4">
-            <button class="btn btn-default" data-bind="click: setPieData1">Pie Data 1</button>
-            <button class="btn btn-default" data-bind="click: setPieData2">Pie Data 2</button>
-            <button class="btn btn-default" data-bind="click: setPieChartOptions1">
-            Options 1
-            </button>
-            <button class="btn btn-default" data-bind="click: setPieChartOptions2">
-            Options 2
-            </button>
-            <button class="btn btn-info" onclick="alert($('canvas')[0].toDataURL());">
-              Get Image
-            </button>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-4">
-            <button class="btn btn-default" data-bind="click: setDataSet1">Data Set 1</button>
-            <button class="btn btn-default" data-bind="click: setDataSet2">Data Set 2</button>
-            <button class="btn btn-default" data-bind="click: setDoughnutChartOptions1">
-            Options 1
-            </button>
-            <button class="btn btn-default" data-bind="click: setDoughnutChartOptions2">
-            Options 2
-            </button>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-4">
-            <button class="btn btn-default" data-bind="click: setBrowserData1">Browsers 1</button>
-            <button class="btn btn-default" data-bind="click: setBrowserData2">Browsers 2</button>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-4">
-            <button class="btn btn-default" data-bind="click: setLineData1">Line Data 1</button>
-            <button class="btn btn-default" data-bind="click: setLineData2">Line Data 2</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    
+    
   </body>
 </html>

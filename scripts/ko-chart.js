@@ -48,13 +48,14 @@
       }
 
       $element.chart = newChart;
-
       //* Remove existing click binding
       if ($element.click) {
         $element.removeEventListener('click', $element.click);
         delete($element.click);
       }
       console.log("*** Drawing Chart: type=" + type);
+      $element.chart.update(0);
+
       //* Add segment click binding
       switch (type) {
         case "Pie":
@@ -187,7 +188,7 @@
       }
     },
     update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-    	drawChartJs(element, valueAccessor, allBindings, viewModel, bindingContext);
+      drawChartJs(element, valueAccessor, allBindings, viewModel, bindingContext);
     }
   };
 
