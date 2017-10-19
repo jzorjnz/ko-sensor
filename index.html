@@ -13,8 +13,18 @@
     <script type='text/javascript' src="scripts/vm.js"></script>
   </head>
   <body>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-4">
+          <img src="logo.png" height="64px;"/>
+        </div>
+        <div class="col-xs-8">
+          <h1>ST Sensors Cloud Demo</h1>
+        </div>
+      </div>
+    </div>
     <div class="fluid-container">
-    <h1>ST Sensors Cloud Demo</h1>
+      
     <div class="panel panel-default">
       <div class="panel-heading">
         Controls
@@ -30,7 +40,10 @@
             <select data-bind = "options: availableEndpoints, value: selectedEndpoint, optionsCaption: 'Choose Endpoint...'"></select></p>
           </div>
           <div class="col-xs-4">
-            <button class="btn btn-default" data-bind="click: startService">Start</button>
+            <button class="btn btn-default" data-bind="click: registerNotificationChannel">Register Notification Service</button><br>
+            <button class="btn btn-default" data-bind="click: getEndpointInfo">Get Endpoint Info</button><br>
+            <button id="start-button" class="btn btn-default" data-bind="click: startService">Start</button>
+            <button id="stop-button" class="btn btn-default" data-bind="click: stopService">Stop</button>
             <!--
             <button class="btn btn-default" data-bind="click: getEndpointInfo">getEndpointInfo</button>
             <button class="btn btn-default" data-bind="click: startTempNotificationService">startTempNotificationService</button>
@@ -47,26 +60,32 @@
       <div class="panel-heading">
         Tables
       </div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-xs-6">
-            <canvas id="temp_chart" data-bind="chartType: 'Line', chartData: tempData, chartOptions : { duration: 0, update: 0, animation : false, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'"></canvas>
-            <br><div align="center" text-align: center;><p>Temperature</p></div>
+      <div align="center">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-6">
+              <canvas id="temp_chart" width="500" height="240" data-bind="chartType: 'Line', chartData: tempData, chartOptions : { duration: 0, update: 0, animation : false, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'}"></canvas>
+              <br><div align="center" text-align: center;><p>Temperature</p></div>
+            </div>
+            <div class="col-xs-6">
+              <canvas id="pressure_chart" width="500" height="240" data-bind="chartType: 'Line', chartData: pressureData, chartOptions : { duration: 0, update: 0, animation : false, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'}"></canvas>
+              <br><div align="center"><p>Pressure</p></div>
+            </div>
           </div>
-          <div class="col-xs-6">
-            <canvas id="pressure_chart" data-bind="chartType: 'Line', chartData: pressureData, chartOptions : { duration: 0, update: 0, animation : false, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'"></canvas>
-            <br><div align="center"><p>Pressure</p></div>
-          </div>
-          <div class="col-xs-6">
-            <canvas id="button_chart" data-bind="chartType: 'Line', chartData: buttonData, chartOptions : { duration: 0, update: 0, animation : false, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'"></canvas>
-            <br><div align="center"><p>Button count</p></div>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-6">
+              <canvas id="button_chart" width="500" height="240" data-bind="chartType: 'Line', chartData: buttonData, chartOptions : { duration: 0, update: 0, animation : false, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'}"></canvas>
+              <br><div align="center"><p>Button count</p></div>
+            </div>
+            <div class="col-xs-6">
+              <canvas id="humidity_chart" width="500" height="240" data-bind="chartType: 'Line', chartData: humidityData, chartOptions : { duration: 0, update: 0, animation : false, showTooltips: true, segmentShowStroke : true, segmentStrokeColor: '#222222'}"></canvas>
+              <br><div align="center"><p>Humidity</p></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-    
-    
-    
   </body>
 </html>
